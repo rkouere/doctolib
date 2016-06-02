@@ -26,6 +26,19 @@ optional arguments:
 
 ```
 
+# How to get the URL
+Go on the URL of the doctor you want an appointement with
+
+Right click on the page and go to Network
+
+Reload
+
+Change the week for the appointement
+
+On the network window, click on the last GET and look at the address on the right panel ("Request URL").
+
+Use this URL as the -u argument (you can change the date if needed).
+
 # needs
 beautifulsoup (`aptitude install python3-bs4`)
 make sure that the fr_FR.utf8 locales are installed

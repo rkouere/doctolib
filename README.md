@@ -41,4 +41,5 @@ Use this URL as the -u argument (you can change the date if needed).
 
 # needs
 beautifulsoup (`aptitude install python3-bs4`)
+
 make sure that the fr_FR.utf8 locales are installed

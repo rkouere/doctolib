@@ -1,4 +1,4 @@
-# needs beautifulsoup (aptitude install python3-bs4
+# needs beautifulsoup (aptitude install python3-bs4)
 # make sure that the fr_FR.utf8 locales are installed
 
 import urllib.request
@@ -107,8 +107,10 @@ def main():
         auth_pwd = arguments.passwd
 
     while True:
-        if(next_appointement > appointement_wanted):
+        if(appointement_wanted > next_appointement):
             send_mail(sender, receivers, message, auth_pwd)
+            print("appointement wanted = {}".format(appointement_wanted))
+            print("next appointement = {}".format(next_appointement))
             sys.exit()
         else:
             print(next_appointement)

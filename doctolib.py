@@ -113,6 +113,9 @@ def main():
             print("next appointement = {}".format(next_appointement))
             sys.exit()
         else:
+            content = get_page(url)
+            next_appointement = datetime.strptime(
+                get_stories(content)[0][:-2], '%d %b %Y')
             print(next_appointement)
             time.sleep(randint(10, 60))
 

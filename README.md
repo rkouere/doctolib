@@ -9,7 +9,7 @@ Currently works with the university of lille 3 mails but can be easily changed t
 
 Usage :
 ```
-usage: doctolib.py [-h] -t TO -f SENDER -d DATE -u URL [-p PASSWD]
+usage: doctolib.py [-h] -t TO -f SENDER -d DATE -u URL
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -19,11 +19,6 @@ optional arguments:
   -d DATE, --date DATE  format : dd-mm-yyyy. Sets the date before which we
                         send a mail
   -u URL, --url URL     set the url to check
-  -p PASSWD, --pass PASSWD
-                        Specify the password for given username. If not given,
-                        script will prompt from stdin
-
-
 ```
 
 # How to get the URL

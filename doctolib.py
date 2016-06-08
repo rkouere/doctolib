@@ -84,11 +84,6 @@ def main():
                            "--url",
                            required=True,
                            help="set the url to check")
-    argparser.add_argument("-p",
-                           "--pass",
-                           dest='passwd',
-                           help="""Specify the password for given username.
-                            If not given, script will prompt from stdin""")
 
     arguments = argparser.parse_args()
 
@@ -101,10 +96,7 @@ def main():
         get_stories(content)[0][:-2], '%d %b %Y')
     appointement_wanted = datetime.strptime(arguments.date, '%d-%m-%Y')
 
-    if not arguments.passwd:
-        auth_pwd = getpass('SMTP password for the sender')
-    else:
-        auth_pwd = arguments.passwd
+    auth_pwd = getpass('SMTP password for the sender')
 
     while True:
         if(appointement_wanted > next_appointement):

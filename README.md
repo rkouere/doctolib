@@ -1,5 +1,9 @@
-# doctolib
+# Requirements
+beautifulsoup (`aptitude install python3-bs4`)
 
+make sure that the fr_FR.utf8 locales are installed
+
+# doctolib
 
 This script checks every x seconds (between 10 and 60 seconds) whether an appointement for a doctor is free before a set date.
 
@@ -34,7 +38,4 @@ On the network window, click on the last GET and look at the address on the righ
 
 Use this URL as the -u argument (you can change the date if needed).
 
-# needs
-beautifulsoup (`aptitude install python3-bs4`)
 
-make sure that the fr_FR.utf8 locales are installed

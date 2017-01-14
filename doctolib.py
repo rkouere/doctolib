@@ -45,14 +45,14 @@ def get_page(url):
     return page_html
 
 
-def get_stories(content):
+def get_next_appointement(content):
     '''
     Get the next date available
     '''
     soup = BeautifulSoup(content, "lxml")
     dates = soup.findAll("p")
     jsonDate = json.loads(str(dates[0])[3:-4])
-    return jsonDate["next_slot"]
+    return datetime.strptime(jsonDate["next_slot"], '%Y-%m-%d')
 
 #send_mail(sender, receivers, message)
 
@@ -88,10 +88,8 @@ def main():
     sender = arguments.sender
     url = arguments.url
     content = get_page(url)
-    print(get_stories(content))
-#    next_appointement = datetime.strptime(
-#        get_stories(content)[0][:-2], '%d %b %Y')
-#    appointement_wanted = datetime.strptime(arguments.date, '%d-%m-%Y')
+    next_appointement = get_next_appointement(content)
+    appointement_wanted = datetime.strptime(arguments.date, '%d-%m-%Y')
 #
 #    auth_pwd = getpass('SMTP password for the sender')
 #
@@ -104,7 +102,7 @@ def main():
 #        else:
 #            content = get_page(url)
 #            next_appointement = datetime.strptime(
-#                get_stories(content)[0][:-2], '%d %b %Y')
+#                get_next_appointement(content)[0][:-2], '%d %b %Y')
 #            print(next_appointement)
 #            time.sleep(randint(10, 60))
 

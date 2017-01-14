@@ -11,6 +11,7 @@ import sys
 from random import randint
 import time
 from getpass import getpass
+import json
 
 # we make sure that we use the french locale
 locale.setlocale(locale.LC_ALL, 'fr_FR.utf8')
@@ -48,15 +49,10 @@ def get_stories(content):
     '''
     Get the next date available
     '''
-    soup = BeautifulSoup(content)
-    titles = []
-
-    for td in soup.findAll("div", {"class": "no-availability"}):
-        a_element = td.find("a")
-        if a_element:
-            titles.append(a_element.string)
-
-    return titles
+    soup = BeautifulSoup(content, "lxml")
+    dates = soup.findAll("p")
+    jsonDate = json.loads(str(dates[0])[3:-4])
+    return jsonDate["next_slot"]
 
 #send_mail(sender, receivers, message)
 
@@ -92,24 +88,25 @@ def main():
     sender = arguments.sender
     url = arguments.url
     content = get_page(url)
-    next_appointement = datetime.strptime(
-        get_stories(content)[0][:-2], '%d %b %Y')
-    appointement_wanted = datetime.strptime(arguments.date, '%d-%m-%Y')
-
-    auth_pwd = getpass('SMTP password for the sender')
-
-    while True:
-        if(appointement_wanted > next_appointement):
-            send_mail(sender, receivers, message, auth_pwd)
-            print("appointement wanted = {}".format(appointement_wanted))
-            print("next appointement = {}".format(next_appointement))
-            sys.exit()
-        else:
-            content = get_page(url)
-            next_appointement = datetime.strptime(
-                get_stories(content)[0][:-2], '%d %b %Y')
-            print(next_appointement)
-            time.sleep(randint(10, 60))
+    print(get_stories(content))
+#    next_appointement = datetime.strptime(
+#        get_stories(content)[0][:-2], '%d %b %Y')
+#    appointement_wanted = datetime.strptime(arguments.date, '%d-%m-%Y')
+#
+#    auth_pwd = getpass('SMTP password for the sender')
+#
+#    while True:
+#        if(appointement_wanted > next_appointement):
+#            send_mail(sender, receivers, message, auth_pwd)
+#            print("appointement wanted = {}".format(appointement_wanted))
+#            print("next appointement = {}".format(next_appointement))
+#            sys.exit()
+#        else:
+#            content = get_page(url)
+#            next_appointement = datetime.strptime(
+#                get_stories(content)[0][:-2], '%d %b %Y')
+#            print(next_appointement)
+#            time.sleep(randint(10, 60))
 
 # This is a Python's special:
 # The only way to tell wether we are running the program as a binary,

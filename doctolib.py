@@ -12,6 +12,7 @@ from random import randint
 import time
 from getpass import getpass
 import json
+import os
 
 # we make sure that we use the french locale
 locale.setlocale(locale.LC_ALL, 'fr_FR.utf8')
@@ -24,6 +25,16 @@ Subject: doclib is free. Hurry up !
 
 """
 
+log_file = "log.txt"
+
+def my_print(text):
+    if os.path.exists(log_file):
+        with open("log.txt", "a") as f:
+            f.write(text + "\n")
+
+    else:
+        with open("log.txt", "w") as f:
+            f.write(text + "\n")
 
 def send_mail(sender, receivers, message, psswd):
     '''
@@ -34,7 +45,7 @@ def send_mail(sender, receivers, message, psswd):
     server.login(sender, psswd)
     server.sendmail(sender, receivers, message)
     server.quit()
-    print("Successfully sent email")
+    my_print("Successfully sent email")
 
 
 def get_page(url):
@@ -96,13 +107,13 @@ def main():
     while True:
         if(appointement_wanted > next_appointement):
             send_mail(sender, receivers, message, auth_pwd)
-            print("appointement wanted = {}".format(appointement_wanted))
-            print("next appointement = {}".format(next_appointement))
+            my_print("appointement wanted = {}".format(appointement_wanted))
+            my_print("next appointement = {}".format(next_appointement))
             sys.exit()
         else:
             content = get_page(url)
             next_appointement = get_next_appointement(content)
-            print(next_appointement)
+            my_print("{}".format(next_appointement))
             time.sleep(randint(10, 60))
 
 # This is a Python's special:

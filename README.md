@@ -25,6 +25,11 @@ optional arguments:
   -u URL, --url URL     set the url to check
 ```
 
+# To run in the background
+To suspend : `Ctrl Z`
+To start in background : `bg %[job]`
+To remove from the terminal : `disown %[job]`
+
 # How to get the URL
 Go on the URL of the doctor you want an appointement with
 

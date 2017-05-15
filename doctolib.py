@@ -107,13 +107,16 @@ def main():
     while True:
         if(appointement_wanted > next_appointement):
             send_mail(sender, receivers, message, auth_pwd)
-            my_print("appointement wanted = {}".format(appointement_wanted))
-            my_print("next appointement = {}".format(next_appointement))
+            with open(log_file, "a") as f:
+                f.write("appointement wanted = {}\n".format(appointement_wanted))
+                f.write("next appointement = {}\n".format(next_appointement))
+      
             sys.exit()
         else:
             content = get_page(url)
             next_appointement = get_next_appointement(content)
-            my_print("{}: {}".format(time.strftime("%H:%M:%S"), next_appointement))
+            with open("log.txt", "w") as f:
+                f.write("{}: {}\n".format(time.strftime("%H:%M:%S"), next_appointement))
             time.sleep(randint(10, 60))
 
 # This is a Python's special:

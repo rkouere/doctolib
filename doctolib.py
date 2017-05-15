@@ -29,7 +29,7 @@ log_file = "log.txt"
 
 def my_print(text):
     if os.path.exists(log_file):
-        with open("log.txt", "a") as f:
+        with open(log_file, "a") as f:
             f.write(text + "\n")
 
     else:
@@ -113,7 +113,7 @@ def main():
         else:
             content = get_page(url)
             next_appointement = get_next_appointement(content)
-            my_print("{}".format(next_appointement))
+            my_print("{}: {}".format(time.strftime("%H:%M:%S"), next_appointement))
             time.sleep(randint(10, 60))
 
 # This is a Python's special:

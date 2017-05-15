@@ -27,7 +27,9 @@ optional arguments:
 
 # To run in the background
 To suspend : `Ctrl Z`
+
 To start in background : `bg %[job]`
+
 To remove from the terminal : `disown %[job]`
 
 # How to get the URL
